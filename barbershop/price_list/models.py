@@ -10,10 +10,19 @@ class Price(models.Model):
             MaxLengthValidator(100, message = "Максимум 100 символов")
         ])
     content = models.TextField(blank = True, verbose_name = "Описание")
-    is_published = models.BooleanField(default = True, verbose_name = "Статус")
+    published = models.BooleanField(default = False, verbose_name = "Опубликовать")
     category = models.ForeignKey('Category', on_delete=models.PROTECT, 
         related_name='posts', verbose_name = 'Категории')
-    
+    is_price = models.DecimalField(max_digits=6, decimal_places=2, blank = False, null=True,
+        verbose_name = "Цена")
+    for_man = models.BooleanField(default=False, verbose_name = "Для мужчин")
+    for_woman = models.BooleanField(default=False, verbose_name = "Для женщин")
+
+
+    class Meta:
+        verbose_name = 'Прайс'
+        verbose_name_plural = "Прайс"
+
     def __str__(self):
         return self.title
     

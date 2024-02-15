@@ -1,6 +1,10 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator
+
+
+
 # Create your models here.
+
 
 class Price(models.Model):
     title = models.CharField(max_length = 250, verbose_name = "Заголовок")
@@ -23,17 +27,26 @@ class Price(models.Model):
         verbose_name = 'Прайс'
         verbose_name_plural = "Прайс"
 
+
     def __str__(self):
         return self.title
-    
+
+
 
 class Category(models.Model):
     name = models.CharField(max_length = 100, db_index = True, verbose_name="Категория")
     slug = models.SlugField(max_length = 250, unique = True, db_index = True)
 
     class Meta:
-        verbose_name = 'Категория'
+        verbose_name = 'Категорию'
+
         verbose_name_plural = "Категории"
+
 
     def __str__(self):
         return self.name
+    
+
+a = Price.objects.all()
+for i in a:
+    print (i.title, i.content)   

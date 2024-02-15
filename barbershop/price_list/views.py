@@ -16,3 +16,4 @@ class BarbershopHome(ListView):
     
     def get_queryset(self):
         return models.Price.objects.all().select_related('title')
+    

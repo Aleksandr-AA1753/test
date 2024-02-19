@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.urls import reverse
 
 
 
@@ -7,20 +8,25 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class Price(models.Model):
-    title = models.CharField(max_length = 250, verbose_name = "Заголовок")
+    title = models.CharField(max_length = 250, blank = False, verbose_name = "Заголовок")
     slug = models.SlugField(max_length = 250, unique = True, db_index = True, verbose_name = "Slug",
         validators = [
             MinLengthValidator(5, message = "Минимум 5 символов"),
             MaxLengthValidator(100, message = "Максимум 100 символов")
         ])
     content = models.TextField(blank = True, verbose_name = "Описание")
-    published = models.BooleanField(default = False, verbose_name = "Опубликовать")
     category = models.ForeignKey('Category', on_delete=models.PROTECT, 
         related_name='posts', verbose_name = 'Категории')
     is_price = models.DecimalField(max_digits=6, decimal_places=2, blank = False, null=True,
         verbose_name = "Цена")
+    published = models.BooleanField(default = True, verbose_name = "Опубликовать")
+    not_published = models.BooleanField(default = False, verbose_name = "Снять с публикации")
+    photo = models.ImageField(upload_to = "photos/%Y/%m/%d", default = None, blank = True, 
+        null = True, verbose_name = "Загрузите фото")
+
     for_man = models.BooleanField(default=False, verbose_name = "Для мужчин")
     for_woman = models.BooleanField(default=False, verbose_name = "Для женщин")
+   
 
 
     class Meta:
@@ -39,7 +45,6 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = 'Категорию'
-
         verbose_name_plural = "Категории"
 
 
@@ -47,6 +52,10 @@ class Category(models.Model):
         return self.name
     
 
+
+
+"""
 a = Price.objects.all()
 for i in a:
     print (i.title, i.content)   
+"""

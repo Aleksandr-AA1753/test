@@ -35,8 +35,18 @@ class Price(models.Model):
 
 
     def __str__(self):
-        return self.title
-
+        return str([
+            self.title,
+            self.slug,
+            self.content,
+            self.category,
+            self.is_price,
+            self.published,
+            self.not_published,
+            self.photo,
+            self.for_man,
+            self.for_woman,
+        ])
 
 
 class Category(models.Model):
@@ -54,8 +64,8 @@ class Category(models.Model):
 
 
 
-"""
+
 a = Price.objects.all()
 for i in a:
-    print (i.title, i.content)   
-"""
+    print(i)
+  

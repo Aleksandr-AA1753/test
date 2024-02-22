@@ -5,6 +5,8 @@ from . import models
 
 admin.site.register(models.Price)
 admin.site.register(models.Category)
+admin.site.register(models.Stock)
+admin.site.register(models.Customers)
 
 
 """

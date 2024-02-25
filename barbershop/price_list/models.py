@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.urls import reverse
+
+
 # Create your models here.
 
 
@@ -38,12 +40,8 @@ class Price(models.Model):
         related_name='category', verbose_name = 'Категории')
     is_customers = models.ForeignKey(Customers, null=True, default=None, 
         on_delete=models.CASCADE, related_name='customers', verbose_name = "Категория клиента")
-    title = models.CharField(max_length = 250, default = True, blank = True, verbose_name = "Заголовок")
-    slug = models.SlugField(max_length = 250, unique = True, db_index = True, verbose_name = "Slug",
-        validators = [
-            MinLengthValidator(5, message = "Минимум 5 символов"),
-            MaxLengthValidator(250, message = "Максимум 250 символов")
-        ])
+    title = models.CharField(max_length = 250, blank = True, verbose_name = "Заголовок")
+    slug = models.SlugField(max_length = 250, unique = True, db_index = True, verbose_name = "Slug",)
     content = models.TextField(blank = True, verbose_name = "Описание")
     is_price = models.IntegerField(blank = True, null=True, verbose_name = "Цена")
     published = models.BooleanField(default = True, verbose_name = "Опубликовать")
@@ -51,8 +49,6 @@ class Price(models.Model):
     photo = models.ImageField(upload_to = "photos/%Y/%m/%d", default = None, blank = True, 
         null = True, verbose_name = "Загрузите фото")
 
-    #for_man = models.BooleanField(default=False, verbose_name = "Для мужчин")
-    #for_woman = models.BooleanField(default=False, verbose_name = "Для женщин")
 
     class Meta:
         verbose_name = 'Прайс'
@@ -92,6 +88,10 @@ class Stock(models.Model):
 
     def __str__(self):
         return self.stock_title
+    
+
+
+
     
 """
 for i in Price.objects.all():

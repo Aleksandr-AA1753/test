@@ -1,12 +1,19 @@
 from django.contrib import admin
 from . import models
-#from models import Price, Categori
+from .models import Price
 
 
-admin.site.register(models.Price)
+@admin.register(Price)
+class ArticleAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ["title"]}
+
+
+
+#admin.site.register(models.Price)
 admin.site.register(models.Category)
 admin.site.register(models.Stock)
 admin.site.register(models.Customers)
+
 
 
 """

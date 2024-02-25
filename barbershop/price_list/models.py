@@ -39,7 +39,7 @@ class Price(models.Model):
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, 
         related_name='category', verbose_name = 'Категории')
     is_customers = models.ForeignKey(Customers, null=True, default=None, 
-        on_delete=models.CASCADE, related_name='customers', verbose_name = "Категория клиента")
+        on_delete=models.DO_NOTHING, related_name='customers', verbose_name = "Категория клиента")
     title = models.CharField(max_length = 250, blank = True, verbose_name = "Заголовок")
     slug = models.SlugField(max_length = 250, unique = True, db_index = True, verbose_name = "Slug",)
     content = models.TextField(blank = True, verbose_name = "Описание")
@@ -90,7 +90,8 @@ class Stock(models.Model):
         return self.stock_title
     
 
-
+for i in Stock.objects.all():
+    print('Название акции: ', i.stock_title,'.', 'Описание акции: ', i.stock_content )
 
     
 """

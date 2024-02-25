@@ -1,19 +1,33 @@
 from django.contrib import admin
-from . import models
-from .models import Price
+#from . import models
+from .models import Price, Category, Stock, Customers
 
 
 @admin.register(Price)
-class ArticleAdmin(admin.ModelAdmin):
+class PriceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["title"]}
 
 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"category_slug": ["category_name"]}
 
-#admin.site.register(models.Price)
+
+@admin.register(Stock)
+class StockAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ["stock_title"]}
+
+
+@admin.register(Customers)
+class CustomersAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"customers_slug": ["customers_name"]}
+
+"""
+admin.site.register(models.Price)
 admin.site.register(models.Category)
 admin.site.register(models.Stock)
 admin.site.register(models.Customers)
-
+"""
 
 
 """

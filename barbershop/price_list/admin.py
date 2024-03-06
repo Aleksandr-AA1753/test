@@ -6,6 +6,7 @@ from .models import Price, Category, Stock, Customers
 @admin.register(Price)
 class PriceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["title"]}
+    save_on_top = True
 
 
 @admin.register(Category)
